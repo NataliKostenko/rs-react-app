@@ -6,8 +6,8 @@ import ErrorBoundary from './ErrorBoundary';
 import Overlay from './Overlay';
 
 const storageId = 'b0a9c80d-0965-4b88-aaca-69df890a1d3b';
-const correctUrl = 'http://swapi.dev/api/planets/?format=json';
-const wrongUrl = 'http://swapi.dev/api/plonets/?format=json';
+const correctUrl = 'https://swapi.dev/api/planets/?format=json';
+const wrongUrl = 'https://swapi.dev/api/plonets/?format=json';
 
 export interface Planet {
   name: string;
