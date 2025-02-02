@@ -1,0 +1,13 @@
+      .topControls {
+      	display: flex;
+      	flex-direction: row;
+      }
+
+      .topControls input {
+      	width: 100%;
+      }
+
+      button {
+      	background-color: cadetblue;
+      	border-radius: none;
+      }
