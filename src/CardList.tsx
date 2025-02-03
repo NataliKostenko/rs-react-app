@@ -1,4 +1,3 @@
-import React from 'react';
 import './cardList.css';
 import { Planet } from './App';
 
@@ -7,15 +6,16 @@ interface CardListProps {
   searchTerm: string;
 }
 
-class CardList extends React.Component<CardListProps> {
-  buildUrl = () =>
-    this.props.searchTerm
-      ? `${this.props.actualUrl}&search=${this.props.searchTerm}`
-      : this.props.actualUrl;
+export default function CardList(props: CardListProps) {
+  const actualUrl = props.actualUrl;
+  const searchTerm = props.searchTerm;
 
-  requestData(): Planet[] {
+  const buildUrl = () =>
+    searchTerm ? `${actualUrl}&search=${searchTerm}` : actualUrl;
+
+  const requestData = () => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', this.buildUrl(), false);
+    xhr.open('GET', buildUrl(), false);
     // We need to use sync requests because ErrorBoundary does not catch error in async code.
 
     let planets = Array<Planet>();
@@ -39,35 +39,24 @@ class CardList extends React.Component<CardListProps> {
     }
 
     return planets;
-  }
+  };
 
-  render() {
-    const planets = this.requestData();
-    // We need to request data here becasue ErrorBoundary does not catch error in event handlers.
-    return (
-      <table>
-        <tbody>
-          <tr>
-            <th className="w textStart">Name</th>
-            <th className="textStart">Description</th>
-          </tr>
-          {planets.map((item, index) => (
-            <tr key={index} className="w textStart">
-              <td>{item.name}</td>
-              <td>{`diameter: ${item.diameter}, climate: ${item.climate}, population: ${item.population}`}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  }
-}
-
-function areEqual(prevProps: CardListProps, nextProps: CardListProps): boolean {
+  const planets = requestData();
+  // We need to request data here becasue ErrorBoundary does not catch error in event handlers.
   return (
-    prevProps.actualUrl == nextProps.actualUrl &&
-    prevProps.searchTerm == nextProps.searchTerm
+    <table>
+      <tbody>
+        <tr>
+          <th className="w textStart">Name</th>
+          <th className="textStart">Description</th>
+        </tr>
+        {planets.map((item, index) => (
+          <tr key={index} className="w textStart">
+            <td>{item.name}</td>
+            <td>{`diameter: ${item.diameter}, climate: ${item.climate}, population: ${item.population}`}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
-
-export default React.memo(CardList, areEqual);
