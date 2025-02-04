@@ -4,6 +4,7 @@ import CardList from './CardList';
 import ErrorBoundary from './ErrorBoundary';
 import Overlay from './Overlay';
 import { useEffect, useState } from 'react';
+import useSearchTerm from './useSearchTerm';
 
 const storageId = 'b0a9c80d-0965-4b88-aaca-69df890a1d3b';
 const correctUrl = 'https://swapi.dev/api/planets/?format=json';
@@ -19,16 +20,15 @@ export interface Planet {
 export default function App() {
   const [overlay, setOverlay] = useState(true);
   const [actualUrl, setActualUrl] = useState(correctUrl);
-  const [searchTerm, setSearchTerm] = useState(localStorage[storageId] || '');
+  const [searchTerm, setSearchTerm] = useSearchTerm(storageId);
 
   const handleSearchClick = () => {
-    const searchTerm = (
+    const term = (
       document.getElementById('searchTerm') as HTMLInputElement
     )?.value.trim();
-    localStorage[storageId] = searchTerm;
+    setSearchTerm(term);
     setOverlay(true);
     setActualUrl(correctUrl);
-    setSearchTerm(searchTerm);
   };
 
   const handleSearchErrorClick = () => {
@@ -41,7 +41,7 @@ export default function App() {
   return (
     <>
       <div className="container">
-        <Search searchTerm={searchTerm} handleClick={handleSearchClick} />
+        <Search searchTerm={searchTerm} onClick={handleSearchClick} />
         <ErrorBoundary>
           <CardList searchTerm={searchTerm} actualUrl={actualUrl} />
         </ErrorBoundary>
