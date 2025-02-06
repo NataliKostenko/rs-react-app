@@ -5,38 +5,28 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  background-color: rgb(38, 25, 52);
+  color: rgb(222, 235, 245);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.container {
+  width: 800px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.overlay {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.25;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.errorBoundary {
+  margin-top: 5%;
+  float: inline-end;
 }
