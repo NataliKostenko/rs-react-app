@@ -1,0 +1,12 @@
+.details {
+	width: 20%;
+	height: auto;
+	border: solid 3px white;
+	text-align: start;
+	margin-left: 2%;
+	padding-left: 1%;
+}
+
+.details button a {
+	color: black;
+}
