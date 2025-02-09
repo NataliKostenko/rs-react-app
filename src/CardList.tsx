@@ -16,11 +16,13 @@ export default function CardList(props: CardListProps) {
             navigate('/');
         }}
       >
-        <tbody>
+        <thead>
           <tr>
             <th className="w textStart">Name</th>
             <th className="textStart">Description</th>
           </tr>
+        </thead>
+        <tbody>
           {planets.map((item: Planet, index: number) => (
             <tr key={index} className="w textStart">
               <td>
@@ -37,6 +39,6 @@ export default function CardList(props: CardListProps) {
       </table>
     );
   } else {
-    return <h3>Not found search result</h3>;
+    return <p>Not found search result</p>;
   }
 }
