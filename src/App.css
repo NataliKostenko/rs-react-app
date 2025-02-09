@@ -11,15 +11,21 @@ body {
 }
 
 .container {
-  width: 800px;
+  width: 80%;
+}
+
+.panels {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
 }
 
 .overlay {
   display: none;
   width: 100%;
   height: 100%;
-  background-color: black;
-  opacity: 0.25;
+  background-color: red;
+  opacity: 0.75;
   z-index: 100;
   position: absolute;
   top: 0;
@@ -29,4 +35,8 @@ body {
 .errorBoundary {
   margin-top: 5%;
   float: inline-end;
+}
+
+.arrow {
+  opacity: 1;
 }
