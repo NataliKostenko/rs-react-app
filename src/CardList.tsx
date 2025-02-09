@@ -8,9 +8,8 @@ interface CardListProps {
 export default function CardList(props: CardListProps) {
   const { planets } = props;
   const navigate = useNavigate();
-
-  return (
-    <>
+  if (planets.length) {
+    return (
       <table
         onClick={(e) => {
           if (e.target instanceof Element && e.target.tagName != 'A')
@@ -36,6 +35,8 @@ export default function CardList(props: CardListProps) {
           ))}
         </tbody>
       </table>
-    </>
-  );
+    );
+  } else {
+    return <h3>Not found search result</h3>;
+  }
 }
