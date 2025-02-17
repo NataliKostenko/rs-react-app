@@ -1,28 +1,32 @@
+import { useDispatch } from 'react-redux';
 import './Pagination.css';
-import { MouseEventHandler } from 'react';
 import arrowNext from './assets/arrowNext.svg';
 import arrowPrevious from './assets/arrowPrevious.svg';
+import { useAppSelector } from './redux/hooks';
+import { setCurrentPage } from './redux/slices/SearchSlice';
 
-interface PaginationProps {
-  onClickUp: MouseEventHandler<HTMLButtonElement>;
-  onClickDown: MouseEventHandler<HTMLButtonElement>;
-  hasNext: boolean;
-  currentPage: number;
-}
-export default function Pagination(props: PaginationProps) {
-  const { onClickUp, onClickDown, hasNext, currentPage } = props;
+export default function Pagination() {
+  const searchState = useAppSelector((s) => s.search);
+  const currentPage = searchState.currentPage;
+  const hasNext = searchState.hasNext;
+  const dispatch = useDispatch();
+
   if (hasNext || currentPage != 1) {
     return (
       <div className="pagination">
         <button
           disabled={currentPage < 2}
           className="arrow"
-          onClick={onClickDown}
+          onClick={() => dispatch(setCurrentPage(currentPage - 1))}
         >
           <img src={arrowPrevious} alt="arrowprevious" />
         </button>
         <p>{currentPage}</p>
-        <button className="arrow" onClick={onClickUp} disabled={!hasNext}>
+        <button
+          className="arrow"
+          onClick={() => dispatch(setCurrentPage(currentPage + 1))}
+          disabled={!hasNext}
+        >
           <img src={arrowNext} alt="arrownexts" />
         </button>
       </div>
