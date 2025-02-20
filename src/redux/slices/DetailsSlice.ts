@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Planet } from '../../App';
+import { RootState } from '../store';
 
 export type DetailsState = {
   value?: Planet;
@@ -28,5 +29,5 @@ export const detailsSlice = createSlice({
 });
 
 export const { setCurrentPlanet, setCurrentUrl } = detailsSlice.actions;
-
+export const getCurrentPlanet = (state: RootState) => state.details.value;
 export default detailsSlice.reducer;

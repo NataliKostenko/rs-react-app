@@ -5,6 +5,7 @@ import Overlay from './Overlay';
 import { useEffect, useState } from 'react';
 import Pagination from './Pagination';
 import { Outlet } from 'react-router';
+import FlayoutElement from './FlayoutElement';
 
 export interface Planet {
   name: string;
@@ -31,6 +32,7 @@ export default function App() {
         <div className="container">
           <Search />
           <CardList />
+          <FlayoutElement />
           <Pagination />
           <button className="errorBoundary" onClick={handleSearchErrorClick}>
             Error Button

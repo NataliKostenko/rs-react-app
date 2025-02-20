@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { Planet } from '../../App';
 
 export type SearchState = {
   searchTerm: string;
   currentPage: number;
   hasNext: boolean;
-  selectedItems: string[];
+  selectedItems: Planet[];
 };
 
 const storageId = 'b0a9c80d-0965-4b88-aaca-69df890a1d3b';
@@ -29,6 +30,7 @@ export const searchSlice = createSlice({
         searchTerm: action.payload,
         currentPage: 1,
         hasNext: false,
+        selectedItems: [],
       };
     },
     setHasNext: (state: SearchState, action: PayloadAction<boolean>) => {
@@ -37,8 +39,12 @@ export const searchSlice = createSlice({
     setCurrentPage: (state: SearchState, action: PayloadAction<number>) => {
       return { ...state, currentPage: action.payload };
     },
-    addSelectedItem: (state: SearchState, action: PayloadAction<string>) => {
-      if (state.selectedItems.indexOf(action.payload) > 0) {
+    addSelectedItem: (state: SearchState, action: PayloadAction<Planet>) => {
+      if (
+        state.selectedItems
+          .map((planet) => planet.url)
+          .indexOf(action.payload.url) > 0
+      ) {
         return { ...state };
       }
 
@@ -50,8 +56,13 @@ export const searchSlice = createSlice({
     removeSelectedItem: (state: SearchState, action: PayloadAction<string>) => {
       return {
         ...state,
-        selectedItems: state.selectedItems.filter((x) => x != action.payload),
+        selectedItems: state.selectedItems.filter(
+          (x) => x.url != action.payload
+        ),
       };
+    },
+    clearSelectedItems: (state: SearchState) => {
+      return { ...state, selectedItems: [] };
     },
   },
 });
@@ -62,6 +73,7 @@ export const {
   setCurrentPage,
   addSelectedItem,
   removeSelectedItem,
+  clearSelectedItems,
 } = searchSlice.actions;
 
 export const getSearchTerm = (state: RootState) => state.search.searchTerm;

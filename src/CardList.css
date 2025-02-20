@@ -10,6 +10,7 @@ table {
   width: 100%;
   border: solid 3px white;
   margin-top: 5%;
+  padding: 1%;
 }
 
 td,
@@ -24,4 +25,8 @@ th {
 a {
   text-decoration: none;
   color: white;
+}
+
+input[type="checkbox"] {
+  accent-color: cadetblue;
 }

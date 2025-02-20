@@ -1,7 +1,7 @@
 import './cardList.css';
 import { Planet } from './App';
 import { Link, useNavigate } from 'react-router';
-import { setCurrentUrl } from './redux/slices/DetailsSlice';
+import { setCurrentPlanet } from './redux/slices/DetailsSlice';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from './redux/hooks';
 import {
@@ -12,7 +12,7 @@ import {
   setHasNext,
 } from './redux/slices/SearchSlice';
 import { useGetPlanetsQuery } from './redux/api';
-import { useEffect } from 'react';
+import { SyntheticEvent, useEffect } from 'react';
 import React from 'react';
 import { RootState } from './redux/store';
 
@@ -22,7 +22,10 @@ export default function CardList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const data = useGetPlanetsQuery({ searchTerm, currentPage }).currentData;
+  const data = useGetPlanetsQuery({
+    searchTerm,
+    currentPage,
+  }).currentData;
   const planets = data?.results;
   const hasNext = !!data?.next;
   useEffect(() => {
@@ -50,29 +53,36 @@ export default function CardList() {
         </thead>
         <tbody>
           {planets.map((item: Planet, index: number) => (
-            <tr key={index} className="w textStart">
+            <tr
+              key={index}
+              className="w textStart"
+              data-planet={JSON.stringify(item)}
+            >
               <td>
                 <input
-                  data-planet-url={item.url}
-                  checked={selectedItems.findIndex((x) => x == item.url) > -1}
+                  checked={
+                    selectedItems.findIndex((x) => x.url == item.url) > -1
+                  }
                   type="checkbox"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    const planetUrl = e.target?.dataset['planetUrl'];
-                    if (planetUrl) {
-                      if (e.target.checked)
-                        dispatch(addSelectedItem(planetUrl));
-                      else dispatch(removeSelectedItem(planetUrl));
+                    const planetJson =
+                      e.target?.parentElement?.parentElement?.dataset['planet'];
+                    if (planetJson) {
+                      const planet: Planet = JSON.parse(planetJson);
+                      if (e.target.checked) dispatch(addSelectedItem(planet));
+                      else dispatch(removeSelectedItem(planet.url));
                     }
                   }}
                 />
               </td>
               <td
-                onClick={() => {
-                  dispatch(
-                    setCurrentUrl(
-                      `https://swapi.dev/api/planets/${item.url.split('/').findLast((e) => !!e)}`
-                    )
-                  );
+                onClick={(e: SyntheticEvent<HTMLTableCellElement>) => {
+                  const planetJson =
+                    e.currentTarget?.parentElement?.dataset['planet'];
+                  if (planetJson) {
+                    const planet: Planet = JSON.parse(planetJson);
+                    dispatch(setCurrentPlanet(planet));
+                  }
                 }}
               >
                 <Link

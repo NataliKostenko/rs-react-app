@@ -1,0 +1,16 @@
+.flayout {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 5%;
+	border: solid 3px white;
+	padding: 1%;
+	align-items: baseline;
+	/* display: none; */
+
+}
+
+button a {
+	color: black;
+}
