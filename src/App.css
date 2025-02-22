@@ -1,23 +1,56 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-body {
+.dark {
   background-color: rgb(38, 25, 52);
   color: rgb(222, 235, 245);
 }
 
+.light {
+  background-color: #e6e6fa;
+  color: #000000;
+}
+
+.light a {
+  color: #000000;
+}
+
+.light table {
+  border-color: #000000;
+}
+
+.light th,
+.light td {
+  border-left-color: #000000;
+}
+
+.light th {
+  border-bottom-color: #000000;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+
 .container {
   width: 80%;
+  display: flex;
+  flex-direction: column;
 }
 
 .panels {
+  margin: 0 auto;
   width: 1000px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .overlay {
@@ -34,9 +67,14 @@ body {
 
 .errorBoundary {
   margin-top: 5%;
-  float: inline-end;
+  align-self: flex-end;
 }
 
 .arrow {
   opacity: 1;
+}
+
+.switch {
+  margin-bottom: 5%;
+  align-self: flex-end;
 }

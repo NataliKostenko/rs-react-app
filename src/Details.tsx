@@ -5,14 +5,14 @@ import { useAppSelector } from './redux/hooks';
 import { getCurrentPlanet } from './redux/slices/DetailsSlice';
 
 export default function Details() {
-  const CurrentPlanet = useAppSelector(getCurrentPlanet);
+  const currentPlanet = useAppSelector(getCurrentPlanet);
 
   const data: Planet = {
-    name: CurrentPlanet.name,
-    diameter: CurrentPlanet.diameter,
-    climate: CurrentPlanet.climate,
-    population: CurrentPlanet.population,
-    url: CurrentPlanet.url,
+    name: currentPlanet?.name || '',
+    diameter: currentPlanet?.diameter || '',
+    climate: currentPlanet?.climate || '',
+    population: currentPlanet?.population || '',
+    url: currentPlanet?.url || '',
   };
   return (
     <div className="details">

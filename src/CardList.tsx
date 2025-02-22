@@ -35,7 +35,6 @@ export default function CardList() {
   const selectedItems = useAppSelector(
     (state: RootState) => state.search.selectedItems
   );
-
   if (planets?.length) {
     return (
       <table

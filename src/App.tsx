@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import Pagination from './Pagination';
 import { Outlet } from 'react-router';
 import FlayoutElement from './FlayoutElement';
+import Toggler from './Toggler';
+import { ThemeContext } from './ThemeContext';
 
 export interface Planet {
   name: string;
@@ -26,21 +28,31 @@ export default function App() {
 
   useEffect(() => setOverlay(false), [overlay]);
 
+  const [theme, setTheme] = useState('dark');
+
   return (
     <>
-      <div className="panels">
-        <div className="container">
-          <Search />
-          <CardList />
-          <FlayoutElement />
-          <Pagination />
-          <button className="errorBoundary" onClick={handleSearchErrorClick}>
-            Error Button
-          </button>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <div className={`wrap ${theme}`}>
+          <div className="panels">
+            <div className="container">
+              <Toggler />
+              <Search />
+              <CardList />
+              <FlayoutElement />
+              <Pagination />
+              <button
+                className="errorBoundary"
+                onClick={handleSearchErrorClick}
+              >
+                Error Button
+              </button>
+            </div>
+            <Outlet />
+          </div>
+          <Overlay isEnabled={overlay} />
         </div>
-        <Outlet />
-      </div>
-      <Overlay isEnabled={overlay} />
+      </ThemeContext.Provider>
     </>
   );
 }

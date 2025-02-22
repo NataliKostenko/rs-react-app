@@ -23,10 +23,6 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'details/:id',
-        /*   loader: ({ params }) => {
-            const url = `https://swapi.dev/api/planets/${params.id}/`;
-            return fetch(url);
-          }, */
         element: <Details />,
       },
     ],
