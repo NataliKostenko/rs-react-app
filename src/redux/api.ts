@@ -6,7 +6,7 @@ export interface PlanetsResult {
   next?: string;
 }
 
-interface GetPlanetsArgs {
+export interface GetPlanetsArgs {
   searchTerm: string;
   currentPage: number;
 }

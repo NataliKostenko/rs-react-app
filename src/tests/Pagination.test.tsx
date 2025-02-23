@@ -1,26 +1,21 @@
-import { expect, test, vi } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { expect, test } from 'vitest';
 import Pagination from '../Pagination';
+import { setupStore } from '../redux/store';
+import { renderWithProviders } from './test-utils';
+import { screen } from '@testing-library/react';
 
 test('onClickDown should called when onClick fired.', () => {
-  const onClickUp = vi.fn();
-  const onClickDown = vi.fn();
-  render(
-    <Pagination
-      onClickUp={onClickUp}
-      onClickDown={onClickDown}
-      hasNext={true}
-      currentPage={2}
-    />
-  );
-
-  const event = new MouseEvent('click', {
-    bubbles: true,
-    cancelable: true,
+  const expectedPage = 1;
+  const store = setupStore({
+    search: {
+      hasNext: true,
+      currentPage: expectedPage,
+      searchTerm: '',
+      selectedItems: [],
+    },
   });
 
-  fireEvent(document.querySelectorAll('button')[0], event);
+  renderWithProviders(<Pagination />, { store });
 
-  expect(onClickDown.mock.calls[0].length).toBe(1);
-  screen.debug();
+  expect(screen.getByText('1').innerHTML).toBe(expectedPage.toString());
 });

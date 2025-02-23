@@ -20,7 +20,7 @@ const initialState: SearchState = {
 };
 
 export const searchSlice = createSlice({
-  name: 'searchTerm',
+  name: 'search',
   initialState,
   reducers: {
     setSearchTerm: (state: SearchState, action: PayloadAction<string>) => {

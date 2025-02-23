@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
-import CardList from '../CardList.tsx';
 import { renderWithProviders } from './test-utils.tsx';
 import { setupStore } from '../redux/store.ts';
 import '@testing-library/jest-dom';
+import Search from '../Search.tsx';
 
 const expectedPage = 1;
 const expectedSearchTerm = 'Tatooine';
@@ -16,7 +16,7 @@ const store = setupStore({
 });
 
 test('test selector', async () => {
-  renderWithProviders(<CardList />, { store });
+  renderWithProviders(<Search />, { store });
 
-  expect(document.querySelector('p')).toBeInTheDocument();
+  expect(document.querySelector('input')?.value).toBe(expectedSearchTerm);
 });

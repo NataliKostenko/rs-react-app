@@ -6,5 +6,4 @@ test('PageNotFound should sown error message.', () => {
   render(<PageNotFound />);
   const result = screen.getByText("There's nothing here: 404!");
   expect(result).not.toBeNull();
-  screen.debug();
 });

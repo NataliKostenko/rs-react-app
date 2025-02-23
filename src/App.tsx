@@ -17,11 +17,6 @@ export interface Planet {
   url: string;
 }
 
-export interface ApiResponseData {
-  ApiResponseData: Planet[];
-  hasNext: boolean;
-}
-
 export default function App() {
   const [overlay, setOverlay] = useState(true);
   const handleSearchErrorClick = () => setOverlay(true);

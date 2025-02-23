@@ -19,7 +19,8 @@
   color: #000000;
 }
 
-.light table {
+.light table,
+.light .details {
   border-color: #000000;
 }
 
@@ -30,6 +31,14 @@
 
 .light th {
   border-bottom-color: #000000;
+}
+
+.light button {
+  background-color: plum;
+}
+
+.dark button {
+  background-color: cadetblue;
 }
 
 .wrap {

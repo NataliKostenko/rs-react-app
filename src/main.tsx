@@ -7,14 +7,14 @@ import PageNotFound from './PageNotFound.tsx';
 import ErrorBoundary from './ErrorBoundary.tsx';
 import Details from './Details.tsx';
 import { Provider } from 'react-redux';
-import { store } from './redux/store.ts';
+import { setupStore } from './redux/store.ts';
 const rootElemet = document.getElementById('root');
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <ErrorBoundary>
           <App />
         </ErrorBoundary>
