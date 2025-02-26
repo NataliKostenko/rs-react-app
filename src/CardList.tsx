@@ -1,4 +1,4 @@
-import './cardList.css';
+import './CardList.css';
 import { Planet } from './App';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';

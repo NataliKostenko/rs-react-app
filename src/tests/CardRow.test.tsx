@@ -26,4 +26,5 @@ test('checkbox should fired.', () => {
   renderWithProviders(<CardRow item={planet} />, { store });
 
   expect(document.querySelector('input')?.checked).toBe(true);
+  expect(document.querySelector('a')?.innerHTML).toBe(planet.name);
 });
