@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
-import PageNotFound from '../PageNotFound';
 import { render, screen } from '@testing-library/react';
+import PageNotFound from '@/PageNotFound';
 
 test('PageNotFound should sown error message.', () => {
   render(<PageNotFound />);

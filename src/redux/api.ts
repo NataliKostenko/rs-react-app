@@ -1,5 +1,6 @@
+import Planet from '@/data/Planet';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Planet } from '../App.tsx';
+
 
 export interface PlanetsResult {
   results: Planet[];
@@ -19,6 +20,6 @@ export const apiSlice = createApi({
       query: (args) =>
         `/?format=json&search=${args.searchTerm}&page=${args.currentPage}`,
     }),
-  }),
+  })
 });
 export const { useGetPlanetsQuery } = apiSlice;

@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
-import { renderWithProviders } from './test-utils.tsx';
 import '@testing-library/jest-dom';
-import Toggler from '../Toggler.tsx';
+import { renderWithProviders } from './test-utils.jsx';
+import Toggler from '@/Toggler.jsx';
 
 test('test selector', async () => {
   renderWithProviders(<Toggler />);

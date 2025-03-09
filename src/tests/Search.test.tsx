@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
-import { renderWithProviders } from './test-utils.tsx';
-import { setupStore } from '../redux/store.ts';
 import '@testing-library/jest-dom';
-import Search from '../Search.tsx';
+import { renderWithProviders } from './test-utils.jsx';
+import { setupStore } from '@/redux/store.js';
+import Search from '@/Search.jsx';
 
 const expectedPage = 1;
 const expectedSearchTerm = 'Tatooine';
@@ -12,6 +12,8 @@ const store = setupStore({
     currentPage: expectedPage,
     searchTerm: expectedSearchTerm,
     selectedItems: [],
+    planets: [],
+    isLoading: false,
   },
 });
 

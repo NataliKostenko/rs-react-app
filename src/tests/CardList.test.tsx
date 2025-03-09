@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
-import CardList from '../CardList.tsx';
-import { renderWithProviders } from './test-utils.tsx';
-import { setupStore } from '../redux/store.ts';
+import CardList from '../CardList';
+import { setupStore } from '../redux/store';
 import '@testing-library/jest-dom';
+import { renderWithProviders } from './test-utils';
 
 const expectedPage = 1;
 const expectedSearchTerm = 'Tatooine';
@@ -12,11 +12,14 @@ const store = setupStore({
     currentPage: expectedPage,
     searchTerm: expectedSearchTerm,
     selectedItems: [],
+    planets: [],
+    isLoading: false,
+
   },
 });
 
 test('test selector', async () => {
-  renderWithProviders(<CardList />, { store });
+  renderWithProviders(<CardList planets={[]} />, { store });
 
   expect(document.querySelector('p')).toBeInTheDocument();
 });

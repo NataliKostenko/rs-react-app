@@ -1,3 +1,4 @@
+import React from 'react';
 import { expect, test } from 'vitest';
 import Pagination from '../Pagination';
 import { setupStore } from '../redux/store';
@@ -12,10 +13,12 @@ test('onClickDown should called when onClick fired.', () => {
       currentPage: expectedPage,
       searchTerm: '',
       selectedItems: [],
+      planets: [],
+      isLoading: false,
     },
   });
 
-  renderWithProviders(<Pagination />, { store });
+  renderWithProviders(<Pagination hasNext={false} />, { store });
 
   expect(screen.getByText('1').innerHTML).toBe(expectedPage.toString());
 });

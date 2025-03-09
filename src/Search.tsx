@@ -1,14 +1,15 @@
-import search from '/search.svg';
-import './Search.css';
-import { useAppSelector } from './redux/hooks';
-import { getSearchTerm, setSearchTerm } from './redux/slices/SearchSlice';
+import { setSearchTerm } from './redux/slices/SearchSlice';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import useLocalStorage from './useLocalStorage';
+import Image from 'next/image';
+import search from '../public/search.svg';
+const storageId = 'b0a9c80d-0965-4b88-aaca-69df890a1d3b';
 
 export default function Search() {
-  const searchTerm = useAppSelector(getSearchTerm);
+  const [storageTerm, setStorageTerm] = useLocalStorage(storageId, '');
   const dispatch = useDispatch();
-  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
+  const [localSearchTerm, setLocalSearchTerm] = useState<string>(storageTerm);
 
   return (
     <div className="topControls">
@@ -21,9 +22,12 @@ export default function Search() {
       />
       <button
         type="submit"
-        onClick={() => dispatch(setSearchTerm(localSearchTerm))}
+        onClick={() => {
+          setStorageTerm(localSearchTerm);
+          dispatch(setSearchTerm(localSearchTerm));
+        }}
       >
-        <img src={search} className="search" alt="search" />
+        <Image src={search} className="search" alt="search" />
       </button>
     </div>
   );

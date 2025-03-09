@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { Planet } from './App';
 import { useAppSelector } from './redux/hooks';
 import {
   addSelectedItem,
@@ -8,7 +7,7 @@ import {
 import { RootState } from './redux/store';
 import { SyntheticEvent } from 'react';
 import { setCurrentPlanet } from './redux/slices/DetailsSlice';
-import { Link } from 'react-router';
+import Planet from './data/Planet';
 
 export default function CardRow(props: { item: Planet }) {
   const { item } = props;
@@ -25,6 +24,7 @@ export default function CardRow(props: { item: Planet }) {
           checked={selectedItems.findIndex((x) => x.url == item.url) > -1}
           type="checkbox"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            e.stopPropagation();
             const planetJson =
               e.target?.parentElement?.parentElement?.dataset['planet'];
             if (planetJson) {
@@ -37,16 +37,14 @@ export default function CardRow(props: { item: Planet }) {
       </td>
       <td
         onClick={(e: SyntheticEvent<HTMLTableCellElement>) => {
+          e.stopPropagation();
           const planetJson = e.currentTarget?.parentElement?.dataset['planet'];
           if (planetJson) {
             const planet: Planet = JSON.parse(planetJson);
             dispatch(setCurrentPlanet(planet));
           }
-        }}
-      >
-        <Link to={`details/${item.url.split('/').findLast((e) => !!e)}`}>
-          {item.name}
-        </Link>
+        }} >
+        {item.name}
       </td>
       <td>{`diameter: ${item.diameter}, climate: ${item.climate}, population: ${item.population}`}</td>
     </tr>

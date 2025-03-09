@@ -1,20 +1,21 @@
-import { Link } from 'react-router';
-import './Details.css';
-import { useAppSelector } from './redux/hooks';
-import { getCurrentPlanet } from './redux/slices/DetailsSlice';
+import { useAppSelector } from '@/redux/hooks';
+import { getCurrentPlanet } from '@/redux/slices/DetailsSlice';
+import Link from 'next/link';
 
 export default function Details() {
-  const currentPlanet = useAppSelector(getCurrentPlanet);
 
-  return (
-    <div className="details">
-      <h2>{currentPlanet?.name}</h2>
-      <p>diameter: {currentPlanet?.diameter}</p>
-      <p>climate: {currentPlanet?.climate}</p>
-      <p>population: {currentPlanet?.population}</p>
-      <button>
-        <Link to={'/'}>Close</Link>
-      </button>
-    </div>
-  );
+  const currentPlanet = useAppSelector(getCurrentPlanet);
+  if (currentPlanet) {
+    return (
+      <div className="details">
+        <h2>{currentPlanet?.name}</h2>
+        <p>diameter: {currentPlanet?.diameter}</p>
+        <p>climate: {currentPlanet?.climate}</p>
+        <p>population: {currentPlanet?.population}</p>
+        <Link href={'/'}> <button >
+          Close
+        </button></Link>
+      </div>
+    );
+  } return null;
 }

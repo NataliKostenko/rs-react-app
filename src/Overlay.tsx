@@ -1,12 +1,12 @@
-interface OverlayProps {
-  isEnabled: boolean;
-}
+import { useAppSelector } from './redux/hooks';
+import { getIsLoading } from "./redux/slices/SearchSlice";
 
-export default function Overlay(props: OverlayProps) {
+export default function Overlay() {
+  const isLoading = useAppSelector(getIsLoading);
   return (
     <div
       className="overlay"
-      style={{ display: props.isEnabled ? 'block' : 'none' }}
+      style={{ display: isLoading ? 'block' : 'none' }}
     ></div>
   );
 }

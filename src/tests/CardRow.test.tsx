@@ -1,3 +1,4 @@
+import React from 'react';
 import { expect, test } from 'vitest';
 import CardRow from '../CardRow';
 import { setupStore } from '../redux/store';
@@ -19,6 +20,8 @@ const store = setupStore({
     currentPage: expectedPage,
     searchTerm: expectedSearchTerm,
     selectedItems: [planet],
+    planets: [],
+    isLoading: false,
   },
 });
 

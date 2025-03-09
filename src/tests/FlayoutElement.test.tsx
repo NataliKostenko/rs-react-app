@@ -34,6 +34,8 @@ test('test div selected', async () => {
       currentPage: 1,
       searchTerm: '',
       selectedItems: [planet],
+      planets: [],
+      isLoading: false,
     },
   });
 
@@ -42,4 +44,5 @@ test('test div selected', async () => {
   expect(document.querySelector('div.flayout div')?.innerHTML).toBe(
     'Selected 1 elements'
   );
+  expect(document.querySelector('a')?.innerHTML).toBe('Download');
 });

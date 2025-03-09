@@ -1,6 +1,7 @@
 import { render, RenderOptions } from '@testing-library/react';
+import ReactDOM from 'react-dom';
 import { AppStore, RootState, setupStore } from '../redux/store';
-import { PropsWithChildren } from 'react';
+import { JSX, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
 

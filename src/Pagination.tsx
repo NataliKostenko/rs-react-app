@@ -1,14 +1,14 @@
 import { useDispatch } from 'react-redux';
-import './Pagination.css';
-import arrowNext from './assets/arrowNext.svg';
-import arrowPrevious from './assets/arrowPrevious.svg';
+import arrowNext from '../public/arrowNext.svg';
+import arrowPrevious from '../public/arrowPrevious.svg';
 import { useAppSelector } from './redux/hooks';
 import { setCurrentPage } from './redux/slices/SearchSlice';
+import Image from 'next/image';
 
-export default function Pagination() {
+export default function Pagination(props: { hasNext: boolean }) {
+  const { hasNext } = props;
   const searchState = useAppSelector((s) => s.search);
   const currentPage = searchState.currentPage;
-  const hasNext = searchState.hasNext;
   const dispatch = useDispatch();
 
   if (hasNext || currentPage != 1) {
@@ -19,7 +19,7 @@ export default function Pagination() {
           className="arrow"
           onClick={() => dispatch(setCurrentPage(currentPage - 1))}
         >
-          <img src={arrowPrevious} alt="arrowprevious" />
+          <Image src={arrowPrevious} alt="arrowprevious" />
         </button>
         <p>{currentPage}</p>
         <button
@@ -27,7 +27,7 @@ export default function Pagination() {
           onClick={() => dispatch(setCurrentPage(currentPage + 1))}
           disabled={!hasNext}
         >
-          <img src={arrowNext} alt="arrownexts" />
+          <Image src={arrowNext} alt="arrownexts" />
         </button>
       </div>
     );

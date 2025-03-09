@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
-import { renderWithProviders } from './test-utils.tsx';
-import { setupStore } from '../redux/store.ts';
 import '@testing-library/jest-dom';
-import Details from '../Details.tsx';
+import { renderWithProviders } from './test-utils.jsx';
+import { setupStore } from '@/redux/store.js';
+import Details from '@/Details.jsx';
 
 const planet = {
   name: 'Tatooine',

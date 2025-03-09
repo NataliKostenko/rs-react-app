@@ -1,22 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { Planet } from '../../App';
+import Planet from '@/data/Planet';
 
 export type SearchState = {
   searchTerm: string;
   currentPage: number;
   hasNext: boolean;
   selectedItems: Planet[];
+  planets: Planet[];
+  isLoading: boolean;
 };
 
-const storageId = 'b0a9c80d-0965-4b88-aaca-69df890a1d3b';
-
 const initialState: SearchState = {
-  searchTerm: localStorage[storageId] || '',
+  searchTerm: '',
   currentPage: 1,
   hasNext: false,
   selectedItems: [],
+  planets: [],
+  isLoading: false,
 };
 
 export const searchSlice = createSlice({
@@ -24,7 +26,6 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     setSearchTerm: (state: SearchState, action: PayloadAction<string>) => {
-      window.localStorage.setItem(storageId, action.payload);
       return {
         ...state,
         searchTerm: action.payload,
@@ -64,7 +65,13 @@ export const searchSlice = createSlice({
     clearSelectedItems: (state: SearchState) => {
       return { ...state, selectedItems: [] };
     },
-  },
+    setIsLoading: (state: SearchState, action: PayloadAction<boolean>) => {
+      return { ...state, isLoading: action.payload };
+    },
+    setPlanets: (state: SearchState, action: PayloadAction<Planet[]>) => {
+      return { ...state, planets: action.payload };
+    },
+  }
 });
 
 export const {
@@ -74,10 +81,14 @@ export const {
   addSelectedItem,
   removeSelectedItem,
   clearSelectedItems,
+  setIsLoading,
+  setPlanets,
 } = searchSlice.actions;
 
 export const getSearchTerm = (state: RootState) => state.search.searchTerm;
 export const getCurrentPage = (state: RootState) => state.search.currentPage;
 export const getHasNext = (state: RootState) => state.search.hasNext;
+export const getIsLoading = (state: RootState) => state.search.isLoading;
+//export const getPlanets = (state: RootState) => state.search.planets;
 
 export default searchSlice.reducer;

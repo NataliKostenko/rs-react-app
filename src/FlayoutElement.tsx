@@ -1,5 +1,4 @@
 import { RootState } from './redux/store';
-import './FlayoutElement.css';
 import { useAppSelector } from './redux/hooks';
 import { clearSelectedItems } from './redux/slices/SearchSlice';
 import { useDispatch } from 'react-redux';
