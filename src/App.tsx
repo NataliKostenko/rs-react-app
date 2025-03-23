@@ -1,14 +1,15 @@
-import { Link } from 'react-router';
 import './App.css'
+import Filter from './filter';
+import List from './list';
+import Search from './search';
 
 function App() {
 
-  return (
-    <><div className='link'>
-      <Link to='/form1'>fORM1</Link>
-      <Link to='/form2'>fORM2</Link>
-    </div>
-    </>
+  return (<>
+    <Search />
+    <Filter />
+    <List />
+  </>
   )
 }
 

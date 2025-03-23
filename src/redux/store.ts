@@ -1,12 +1,13 @@
+
 import type { Action, ThunkAction } from '@reduxjs/toolkit';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './slice';
-
+import countryReducer from './slice';
 import { listenerMiddleware } from './listenerMiddleware';
+import { apiSlice } from './api';
 
 const rootReducer = combineReducers({
-	user: userReducer,
-
+	country: countryReducer,
+	[apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 export function setupStore(preloadedState?: Partial<RootState>) {
@@ -16,7 +17,7 @@ export function setupStore(preloadedState?: Partial<RootState>) {
 		middleware: (getDefaultMiddleware) =>
 			getDefaultMiddleware()
 				.prepend(listenerMiddleware.middleware)
-				.concat(user.middleware),
+				.concat(apiSlice.middleware),
 	});
 }
 
